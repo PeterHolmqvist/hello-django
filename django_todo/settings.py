@@ -9,11 +9,11 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 import dj_database_url
 import env
-import os
+
 
 if os.path.isfile("env.py"):
     import env
@@ -26,12 +26,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-fr*z4(9phen*bcakf#(zti&w5f$3hrk!!c^8mqw7j$vhy&!1wf'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-fr*z4(9phen*bcakf#(zti&w5f$3hrk!!c^8mqw7j$vhy&!1wf')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://git.heroku.com/peter-django-todo-app.git']
+ALLOWED_HOSTS = [
+    os.environ.get('HEROKU_HOSTNAME')]
 
 
 # Application definition
